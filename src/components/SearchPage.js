@@ -24,13 +24,6 @@ const SearchPage = ({ books, changeShelf }) => {
       } else {
         setSearchResults(res);
       }
-      searchResults.map((book) => {
-        const bookOnShelf = books.find((b) => b.id === book.id);
-        if (bookOnShelf) {
-          book.shelf = bookOnShelf.shelf;
-        }
-        return book;
-      });
     });
   };
 
@@ -53,10 +46,22 @@ const SearchPage = ({ books, changeShelf }) => {
         <div className="search-books-results">
           <ol className="books-grid">
             {searchResults.length !== 0 ? (
-              searchResults.map((book) => {
+              searchResults.map((result) => {
+                let shelf = "none";
+                books.map((book) => {
+                  if (book.id !== result.id) {
+                    result.shelf = "none";
+                  } else {
+                    shelf = book.shelf;
+                  }
+                });
                 return (
-                  <li key={book.id}>
-                    <Book book={book} changeShelf={changeShelf} />
+                  <li key={result.id}>
+                    <Book
+                      book={result}
+                      changeShelf={changeShelf}
+                      currentShelf={shelf}
+                    />
                   </li>
                 );
               })
