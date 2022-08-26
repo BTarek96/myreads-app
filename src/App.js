@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import MainPage from "./components/MainPage";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -41,6 +42,7 @@ function App() {
           </div>
         }
       />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

@@ -24,6 +24,13 @@ const SearchPage = ({ books, changeShelf }) => {
       } else {
         setSearchResults(res);
       }
+      searchResults.map((book) => {
+        const bookOnShelf = books.find((b) => b.id === book.id);
+        if (bookOnShelf) {
+          book.shelf = bookOnShelf.shelf;
+        }
+        return book;
+      });
     });
   };
 
